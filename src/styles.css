@@ -1,7 +1,33 @@
 /* You can add global styles to this file, and also import other style files */
+:root {
+  --primary-color: #3A98B9;
+  --secondary-color: #F8CBA6;
+  --grey-dark: #555;
+  --grey: #999;
+  --grey-light: #ccc;
+  --white: #fff;
+  --black: #000;
+
+  --border-radius: 8px;
+  --global-border: 1px solid var(--grey);
+
+  --screen-sm: 800px;
+  --screen-md: 1200px;
+  --screen-lg: 1600px;
+
+  --space-xs: .25rem;
+  --space-sm: .5rem;
+  --space: 1rem;
+  --space-lg: 2rem;
+  --space-xl: 4rem;
+}
+
+
 body {
   margin: 0;
   font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  box-sizing: border-box;
 }
 
 .container {
@@ -9,4 +35,26 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
+}
+
+.row {
+  display: flex;
+  flex-direction: row;
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+}
+
+.font-bold {
+  font-weight: bold;
+}
+
+.text-sm {
+  font-size: 14px;
+}
+
+.text-lg {
+  font-size: 18px;
 }
