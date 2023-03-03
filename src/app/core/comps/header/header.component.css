@@ -2,3 +2,16 @@
   border-bottom: var(--global-border);
   padding: var(--space) 0;
 }
+
+.header-nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  gap: var(--space);
+  padding: 0;
+}
+
+.header-nav li {
+  list-style: none;
+}

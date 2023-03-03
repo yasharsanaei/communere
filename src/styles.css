@@ -20,6 +20,8 @@
   --space: 1rem;
   --space-lg: 2rem;
   --space-xl: 4rem;
+
+  --transition: 200ms ease-in-out all;
 }
 
 
@@ -57,4 +59,14 @@ body {
 
 .text-lg {
   font-size: 18px;
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  transition: var(--transition);
+}
+
+a:hover {
+  color: var(--grey-dark);
 }
