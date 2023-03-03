@@ -7,7 +7,7 @@ import {DataStoreModule} from "./data-store/data-store.module";
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,
