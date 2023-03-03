@@ -33,11 +33,18 @@ body {
 }
 
 .container {
-  max-width: 1600px;
+  max-width: 90vw;
   width: 100%;
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+@media screen and (min-width: 1600px) {
+  .container {
+    max-width: 1540px;
+  }
+}
+
 
 .row {
   display: flex;
@@ -69,12 +76,6 @@ a {
 
 a:hover {
   color: var(--grey-dark);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  gap: var(--space);
 }
 
 .card {

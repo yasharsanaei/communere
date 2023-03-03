@@ -10,5 +10,6 @@ import { NotFoundComponent } from './comps/not-found/not-found.component';
 @NgModule({
   declarations: [LayoutComponent, HeaderComponent, FooterComponent, NotFoundComponent],
   imports: [CommonModule, CoreRoutingModule],
+  exports: [HeaderComponent],
 })
 export class CoreModule {}

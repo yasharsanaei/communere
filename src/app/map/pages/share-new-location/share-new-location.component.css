@@ -1,3 +1,9 @@
-.new-location-card {
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space);
+}
+
+.grid > * {
   grid-column: span 6 / span 6;
 }
