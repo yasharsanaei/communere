@@ -1,7 +1,7 @@
-import {NgModule} from '@angular/core';
-import {RouterModule, Routes} from '@angular/router';
-import {LayoutComponent} from "./comps/layout/layout.component";
-import {NotFoundComponent} from "./comps/not-found/not-found.component";
+import { NgModule } from '@angular/core';
+import { RouterModule, Routes } from '@angular/router';
+import { LayoutComponent } from './comps/layout/layout.component';
+import { NotFoundComponent } from './comps/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -10,24 +10,23 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: () => import('../map/map.module').then(m => m.MapModule)
+        loadChildren: () => import('../map/map.module').then(m => m.MapModule),
       },
       {
         path: '404',
-        component: NotFoundComponent
+        component: NotFoundComponent,
       },
-    ]
+    ],
   },
   {
     path: '**',
     redirectTo: '404',
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class CoreRoutingModule {
-}
+export class CoreRoutingModule {}

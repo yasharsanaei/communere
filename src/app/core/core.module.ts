@@ -7,17 +7,8 @@ import { HeaderComponent } from './comps/header/header.component';
 import { FooterComponent } from './comps/footer/footer.component';
 import { NotFoundComponent } from './comps/not-found/not-found.component';
 
-
 @NgModule({
-  declarations: [
-    LayoutComponent,
-    HeaderComponent,
-    FooterComponent,
-    NotFoundComponent
-  ],
-  imports: [
-    CommonModule,
-    CoreRoutingModule
-  ]
+  declarations: [LayoutComponent, HeaderComponent, FooterComponent, NotFoundComponent],
+  imports: [CommonModule, CoreRoutingModule],
 })
-export class CoreModule { }
+export class CoreModule {}

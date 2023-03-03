@@ -8,9 +8,8 @@ describe('ShareNewLocationComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ShareNewLocationComponent ]
-    })
-    .compileComponents();
+      declarations: [ShareNewLocationComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(ShareNewLocationComponent);
     component = fixture.componentInstance;
