@@ -9,7 +9,7 @@
   --black: #000;
 
   --border-radius: 8px;
-  --global-border: 1px solid var(--grey);
+  --global-border: 1px solid var(--grey-light);
 
   --screen-sm: 800px;
   --screen-md: 1200px;

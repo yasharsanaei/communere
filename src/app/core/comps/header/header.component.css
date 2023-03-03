@@ -1,3 +1,4 @@
 :host {
-  border-bottom: 1px solid grey;
+  border-bottom: var(--global-border);
+  padding: var(--space) 0;
 }
