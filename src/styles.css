@@ -70,3 +70,27 @@ a {
 a:hover {
   color: var(--grey-dark);
 }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: var(--space);
+}
+
+.card {
+  border: 1px solid var(--primary-color);
+  border-radius: var(--border-radius);
+}
+
+.card .card-body {
+  padding: var(--space-sm);
+}
+
+.card .card-header {
+  padding: var(--space-sm);
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  background-color: var(--primary-color);
+  color: var(--white);
+  font-weight: bold;
+}
