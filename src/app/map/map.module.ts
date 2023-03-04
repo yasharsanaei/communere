@@ -7,9 +7,10 @@ import { ViewLocationsComponent } from './pages/view-locations/view-locations.co
 import {SharedModule} from "../shared/shared.module";
 import {CoreModule} from "../core/core.module";
 import { MapSelectLocationComponent } from './comps/map-select-location/map-select-location.component';
+import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 
 @NgModule({
   declarations: [ShareNewLocationComponent, ViewLocationsComponent, MapSelectLocationComponent],
-  imports: [CommonModule, MapRoutingModule, SharedModule, CoreModule],
+  imports: [CommonModule, MapRoutingModule, SharedModule, CoreModule, LeafletModule],
 })
 export class MapModule {}
