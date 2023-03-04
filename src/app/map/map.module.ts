@@ -6,9 +6,10 @@ import { ShareNewLocationComponent } from './pages/share-new-location/share-new-
 import { ViewLocationsComponent } from './pages/view-locations/view-locations.component';
 import {SharedModule} from "../shared/shared.module";
 import {CoreModule} from "../core/core.module";
+import { MapSelectLocationComponent } from './comps/map-select-location/map-select-location.component';
 
 @NgModule({
-  declarations: [ShareNewLocationComponent, ViewLocationsComponent],
+  declarations: [ShareNewLocationComponent, ViewLocationsComponent, MapSelectLocationComponent],
   imports: [CommonModule, MapRoutingModule, SharedModule, CoreModule],
 })
 export class MapModule {}
