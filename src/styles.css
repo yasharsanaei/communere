@@ -3,7 +3,9 @@
 
 :root {
   --primary-color: #3A98B9;
+  --primary-color-dark: #2E7A94;
   --secondary-color: #F8CBA6;
+  --secondary-color-dark: #C6A285;
   --error-color: #F32013;
   --grey-dark: #555;
   --grey: #999;
@@ -11,7 +13,7 @@
   --white: #fff;
   --black: #000;
 
-  --border-radius: 8px;
+  --border-radius: 4px;
   --global-border: 1px solid var(--grey-light);
 
   --screen-sm: 800px;
@@ -94,8 +96,8 @@ a:hover {
 
 .card .card-header {
   padding: var(--space-sm);
-  border-top-left-radius: 6px;
-  border-top-right-radius: 6px;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
   background-color: var(--primary-color);
   color: var(--white);
   font-weight: bold;
@@ -124,4 +126,37 @@ input:focus, select:focus {
 }
 
 
+.btn {
+  all: unset;
+  font-size: 14px;
+  color: var(--white);
+  border-radius: var(--border-radius);
+  padding: var(--space-sm) var(--space);
+  display: inline-flex;
+  gap: var(--space-xs);
+  justify-items: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  border: 1px solid var(--primary-color-dark);
+  border-radius: var(--border-radius);
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-color-dark);
+}
+
+
+.btn-secondary {
+  background-color: var(--secondary-color);
+  border: 1px solid var(--secondary-color-dark);
+  border-radius: var(--border-radius);
+}
+
+.btn-secondary:hover {
+  background-color: var(--secondary-color-dark);
+}
 
