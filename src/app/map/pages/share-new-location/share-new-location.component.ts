@@ -3,6 +3,7 @@ import { Position } from '../../../core/types/map/position';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LocationImpl } from '../../../core/types/location/locationImpl';
 import { Router } from '@angular/router';
+import { DataStoreService } from '../../../data-store/services/data-store.service';
 
 @Component({
   selector: 'app-share-new-location',
@@ -14,7 +15,7 @@ export class ShareNewLocationComponent implements OnDestroy {
   newLocationForm: FormGroup;
   isFormSubmitted: boolean;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private dataStoreService: DataStoreService) {
     this.location = new LocationImpl();
     this.isFormSubmitted = false;
     this.newLocationForm = this.formBuilder.group({
@@ -37,7 +38,7 @@ export class ShareNewLocationComponent implements OnDestroy {
     this.location.locationName = this.newLocationForm.controls['locationName'].value;
     this.location.locationType = this.newLocationForm.controls['locationType'].value;
     const locationData = this.location.getLocationValue();
-    //   TODO: save 'locationData' to database
+    this.dataStoreService.saveData(locationData);
     await this.router.navigateByUrl('/');
   }
 }
