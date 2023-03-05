@@ -34,7 +34,10 @@ export class ShareNewLocationComponent implements OnDestroy {
   async submitForm($event: SubmitEvent) {
     this.isFormSubmitted = true;
     if (this.newLocationForm.invalid || !this.location.position) return;
-    //   TODO: save to database
+    this.location.locationName = this.newLocationForm.controls['locationName'].value;
+    this.location.locationType = this.newLocationForm.controls['locationType'].value;
+    const locationData = this.location.getLocationValue();
+    //   TODO: save 'locationData' to database
     await this.router.navigateByUrl('/');
   }
 }

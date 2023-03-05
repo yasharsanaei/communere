@@ -11,4 +11,11 @@ export class LocationImpl implements Location {
     this.locationType = locationType ?? '';
     this.position = position ? ({ ...position } as Position) : undefined;
   }
+
+  getLocationValue = () =>
+    ({
+      locationName: this.locationName,
+      locationType: this.locationType,
+      position: this.position,
+    } satisfies Location);
 }
