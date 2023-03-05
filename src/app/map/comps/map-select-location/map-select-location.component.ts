@@ -1,6 +1,9 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 import * as Leaflet from 'leaflet';
+import { LeafletStatic } from '../../../core/types/map/leaflet-static';
+import { LeafletMouseEvent } from 'leaflet';
+import { MapLocation } from '../../../core/types/map/map-location';
 
 @Component({
   selector: 'app-map-select-location',
@@ -9,49 +12,30 @@ import * as Leaflet from 'leaflet';
 })
 export class MapSelectLocationComponent {
   @Output()
-  selectedLocation: EventEmitter<any> = new EventEmitter();
+  selectedLocation: EventEmitter<MapLocation> = new EventEmitter();
 
   constructor() {
-    Leaflet.Icon.Default.mergeOptions({
-      iconUrl: 'assets/icons/map-location.png',
-      iconRetinaUrl: 'assets/icons/map-location.png',
-      shadowUrl: '',
-      iconSize: [32, 32],
-      shadowSize: [0, 0],
-    });
+    Leaflet.Icon.Default.mergeOptions(LeafletStatic.defaultIconProps());
   }
 
   map!: Leaflet.Map;
   markers: Leaflet.Marker[] = [];
   options = {
-    layers: [
-      Leaflet.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
-      }),
-    ],
-    zoom: 16,
-    center: { lat: 51.5072, lng: 0.1276 },
+    ...LeafletStatic.defaultMapLayers(),
   };
-
-  generateMarker(data: any, index: number) {
-    return Leaflet.marker(data.position).on('click', event => this.markerClicked(event, index));
-  }
 
   onMapReady($event: Leaflet.Map) {
     this.map = $event;
   }
 
-  mapClicked($event: any) {
-    const markerData = {
-      position: { lat: $event.latlng.lat, lng: $event.latlng.lng },
-    };
-    const marker = this.generateMarker(markerData, 0);
-    marker.addTo(this.map).bindPopup(`<b>${markerData.position.lat},  ${markerData.position.lng}</b>`);
-    // this.map.panTo(markerData.position);
+  mapClicked($event: LeafletMouseEvent) {
+    const position: MapLocation = { lat: $event.latlng.lat, lng: $event.latlng.lng };
+    const markerData = { position };
+    if (this.markers && this.markers.length > 0) this.markers.pop()?.removeFrom(this.map);
+    const marker = LeafletStatic.generateMarker(markerData)
+      .addTo(this.map)
+      .bindPopup(`<b>${markerData.position.lat},  ${markerData.position.lng}</b>`);
     this.markers.push(marker);
-  }
-
-  markerClicked($event: any, index: number) {
-    console.log($event);
+    this.selectedLocation.emit(position);
   }
 }
