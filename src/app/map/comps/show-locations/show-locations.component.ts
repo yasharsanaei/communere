@@ -1,8 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import * as Leaflet from 'leaflet';
+import { Subject } from 'rxjs';
+
 import { LeafletStatic } from '../../../core/types/map/leaflet-static';
 import { DataStoreService } from '../../../data-store/services/data-store.service';
-import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-show-locations',
