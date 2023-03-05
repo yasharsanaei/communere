@@ -34,7 +34,6 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
   ngOnInit(): void {
     this.dataStoreService.locationList$.pipe(takeUntil(this._onDestroy$)).subscribe({
       next: locationList => {
-        this.locationList.map(l => LeafletStatic.generateMarker(l.position)).forEach(m => this.map.removeLayer(m));
         this.locationList = [...locationList];
         this._updateMapMarkers();
       },

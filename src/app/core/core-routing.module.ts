@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LayoutComponent } from './comps/layout/layout.component';
-import { NotFoundComponent } from './comps/not-found/not-found.component';
 
 const routes: Routes = [
   {
@@ -13,15 +12,16 @@ const routes: Routes = [
         loadChildren: () => import('../map/map.module').then(m => m.MapModule),
       },
       {
-        path: '404',
-        component: NotFoundComponent,
+        path: '**',
+        pathMatch: 'full',
+        redirectTo: '',
       },
     ],
   },
   {
     path: '**',
-    redirectTo: '404',
     pathMatch: 'full',
+    redirectTo: '',
   },
 ];
 
