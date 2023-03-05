@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Location } from '../../../core/types/location/location';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-location-popup',
@@ -10,5 +11,15 @@ export class LocationPopupComponent {
   @Input()
   location!: Location | undefined;
 
-  constructor() {}
+  constructor(private router: Router) {}
+
+  async editLocation() {
+    await this.router.navigate(['/share-location'], {
+      queryParams: {
+        locationName: this.location?.locationName,
+        locationType: this.location?.locationType,
+        ...this.location?.position,
+      },
+    });
+  }
 }

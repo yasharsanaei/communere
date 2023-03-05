@@ -1,5 +1,11 @@
-<div *ngIf="location" class="">
-  <div class="">{{location.locationName}}</div>
-  <div class="">{{location.locationType}}</div>
-  <div class="">{{location.position | json}}</div>
-</div>
+<ng-container *ngIf="location" class="">
+  <div class="">
+    <strong>Location name: </strong>
+    <span>{{location.locationName}}</span>
+  </div>
+  <div class="">
+    <strong>Location type: </strong>
+    <span>{{location.locationType}}</span>
+  </div>
+  <button (click)="editLocation()">Edit</button>
+</ng-container>
