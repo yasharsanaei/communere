@@ -1,0 +1,18 @@
+.popup {
+  padding: var(--space) 0;
+}
+
+.popup-item {
+  margin-bottom: var(--space);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xs)
+}
+
+.popup-item > * {
+  font-size: 14px;
+}
+
+.popup-item > span {
+  color: var(--grey);
+}

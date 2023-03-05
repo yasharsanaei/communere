@@ -1,11 +1,11 @@
-<ng-container *ngIf="location" class="">
-  <div class="">
-    <strong>Location name: </strong>
-    <span>{{location.locationName}}</span>
+<div class="popup" *ngIf="location">
+  <div class="popup-item">
+    <span>Location name: </span>
+    <strong>{{location.locationName}}</strong>
   </div>
-  <div class="">
-    <strong>Location type: </strong>
-    <span>{{location.locationType}}</span>
+  <div class="popup-item">
+    <span>Location type: </span>
+    <strong>{{location.locationType}}</strong>
   </div>
-  <button (click)="editLocation()">Edit</button>
-</ng-container>
+  <button class="btn btn-primary" (click)="editLocation()">Edit</button>
+</div>
