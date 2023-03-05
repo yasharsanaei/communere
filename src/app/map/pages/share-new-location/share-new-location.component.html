@@ -2,7 +2,7 @@
 
   <div class="card">
     <div class="card-header">
-      card Header
+      Share New Location
     </div>
     <div class="card-body">
       <form [formGroup]="newLocationForm" (ngSubmit)="submitForm()">
@@ -27,6 +27,7 @@
         <div class="form-group">
           <label>Map location</label>
           <app-map-select-location
+            [initialPosition]="initialPosition"
             (selectedLocation)="handleSelectedLocation($event)"/>
         </div>
         <button type="submit">Submit</button>

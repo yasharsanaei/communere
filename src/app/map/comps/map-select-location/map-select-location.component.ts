@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import * as Leaflet from 'leaflet';
 import { LeafletStatic } from '../../../core/types/map/leaflet-static';
@@ -11,6 +11,9 @@ import { Position } from '../../../core/types/map/position';
   styleUrls: ['./map-select-location.component.css'],
 })
 export class MapSelectLocationComponent {
+  @Input()
+  initialPosition: Leaflet.LatLngExpression | undefined;
+
   @Output()
   selectedLocation: EventEmitter<Position> = new EventEmitter();
 
@@ -26,15 +29,18 @@ export class MapSelectLocationComponent {
 
   onMapReady($event: Leaflet.Map) {
     this.map = $event;
+    if (this.initialPosition) {
+      const marker = LeafletStatic.generateMarker(this.initialPosition).addTo(this.map);
+      this.map.panTo(marker.getLatLng());
+      this.markers.push(marker);
+    }
   }
 
   mapClicked($event: LeafletMouseEvent) {
     const position: Position = { lat: $event.latlng.lat, lng: $event.latlng.lng };
-    const markerData = { position };
     if (this.markers && this.markers.length > 0) this.markers.pop()?.removeFrom(this.map);
-    const marker = LeafletStatic.generateMarker(markerData.position)
-      .addTo(this.map)
-      .bindPopup(`<b>${markerData.position.lat},  ${markerData.position.lng}</b>`);
+    const marker = LeafletStatic.generateMarker(position).addTo(this.map);
+    this.map.panTo(marker.getLatLng());
     this.markers.push(marker);
     this.selectedLocation.emit(position);
   }

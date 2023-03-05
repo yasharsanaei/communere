@@ -11,7 +11,7 @@ export class LeafletStatic {
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
       }),
     ],
-    zoom: 16,
+    zoom: 10,
     center: { lat: 51.5072, lng: 0.1276 },
   });
 
