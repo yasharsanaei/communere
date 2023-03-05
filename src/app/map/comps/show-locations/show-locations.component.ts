@@ -1,4 +1,13 @@
-import { AfterViewInit, ApplicationRef, Component, ComponentRef, NgZone, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
+import {
+  AfterViewInit,
+  ApplicationRef,
+  Component,
+  ComponentRef,
+  NgZone,
+  OnDestroy,
+  OnInit,
+  ViewContainerRef,
+} from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { LatLngBoundsExpression } from 'leaflet';
 import { Subject, takeUntil } from 'rxjs';

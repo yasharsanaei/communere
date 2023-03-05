@@ -1,8 +1,8 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 import * as Leaflet from 'leaflet';
-import { LeafletStatic } from '../../../core/types/map/leaflet-static';
 import { LeafletMouseEvent } from 'leaflet';
+import { LeafletStatic } from '../../../core/types/map/leaflet-static';
 import { Position } from '../../../core/types/map/position';
 
 @Component({

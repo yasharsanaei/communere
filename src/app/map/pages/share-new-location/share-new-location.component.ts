@@ -45,8 +45,10 @@ export class ShareNewLocationComponent implements OnDestroy {
 
   private updateForm(params: Record<string, string>) {
     this._existingLocation = this._dataStoreService.getData(params['id']);
-    if (this._existingLocation?.locationName) this.newLocationForm.controls['locationName'].setValue(this._existingLocation.locationName);
-    if (this._existingLocation?.locationType) this.newLocationForm.controls['locationType'].setValue(this._existingLocation.locationType);
+    if (this._existingLocation?.locationName)
+      this.newLocationForm.controls['locationName'].setValue(this._existingLocation.locationName);
+    if (this._existingLocation?.locationType)
+      this.newLocationForm.controls['locationType'].setValue(this._existingLocation.locationType);
     if (this._existingLocation?.position) {
       this.initialPosition = this._existingLocation?.position;
       this._position = this._existingLocation?.position;
