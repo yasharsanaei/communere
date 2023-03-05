@@ -1,7 +1,7 @@
-import { Position } from '../map/position';
+import * as Leaflet from 'leaflet';
 
 export interface Location {
-  position: Position | undefined;
+  position: Leaflet.LatLngExpression;
   locationName: string;
   locationType: string;
 }

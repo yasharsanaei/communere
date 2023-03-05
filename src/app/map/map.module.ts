@@ -9,9 +9,10 @@ import {CoreModule} from "../core/core.module";
 import { MapSelectLocationComponent } from './comps/map-select-location/map-select-location.component';
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {ReactiveFormsModule} from "@angular/forms";
+import { ShowLocationsComponent } from './comps/show-locations/show-locations.component';
 
 @NgModule({
-  declarations: [ShareNewLocationComponent, ViewLocationsComponent, MapSelectLocationComponent],
+  declarations: [ShareNewLocationComponent, ViewLocationsComponent, MapSelectLocationComponent, ShowLocationsComponent],
   imports: [CommonModule, MapRoutingModule, SharedModule, CoreModule, LeafletModule, ReactiveFormsModule],
 })
 export class MapModule {}

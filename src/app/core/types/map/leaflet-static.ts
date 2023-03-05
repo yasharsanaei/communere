@@ -1,8 +1,8 @@
 import * as Leaflet from 'leaflet';
 
 export class LeafletStatic {
-  static generateMarker(data: any): Leaflet.Marker {
-    return Leaflet.marker(data.position);
+  static generateMarker(data: Leaflet.LatLngExpression): Leaflet.Marker {
+    return Leaflet.marker(data);
   }
 
   static defaultMapLayers = () => ({

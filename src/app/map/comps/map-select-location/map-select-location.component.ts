@@ -32,7 +32,7 @@ export class MapSelectLocationComponent {
     const position: Position = { lat: $event.latlng.lat, lng: $event.latlng.lng };
     const markerData = { position };
     if (this.markers && this.markers.length > 0) this.markers.pop()?.removeFrom(this.map);
-    const marker = LeafletStatic.generateMarker(markerData)
+    const marker = LeafletStatic.generateMarker(markerData.position)
       .addTo(this.map)
       .bindPopup(`<b>${markerData.position.lat},  ${markerData.position.lng}</b>`);
     this.markers.push(marker);

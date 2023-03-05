@@ -1,21 +1,24 @@
 import { Location } from './location';
-import { Position } from '../map/position';
+import * as Leaflet from 'leaflet';
 
 export class LocationImpl implements Location {
   locationName: string;
   locationType: string;
-  position: Position | undefined;
+  position: Leaflet.LatLngExpression;
 
-  constructor({ locationName, locationType, position }: Location = {} as Location) {
-    this.locationName = locationName ?? '';
-    this.locationType = locationType ?? '';
-    this.position = position ? ({ ...position } as Position) : undefined;
+  constructor({ locationName, locationType, position }: Location) {
+    this.locationName = locationName;
+    this.locationType = locationType;
+    this.position = position;
   }
 
-  getLocationValue = () =>
-    ({
-      locationName: this.locationName,
-      locationType: this.locationType,
-      position: this.position,
-    } satisfies Location);
+  getLocationValue = (): Location | null => {
+    if (this.position)
+      return {
+        locationName: this.locationName,
+        locationType: this.locationType,
+        position: this.position,
+      } as Location;
+    else return null;
+  };
 }

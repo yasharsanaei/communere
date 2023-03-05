@@ -5,7 +5,7 @@
       card Header
     </div>
     <div class="card-body">
-      <form [formGroup]="newLocationForm" (ngSubmit)="submitForm($event)">
+      <form [formGroup]="newLocationForm" (ngSubmit)="submitForm()">
         <div class="form-group" [class.error]="newLocationForm.controls['locationName'].invalid && isFormSubmitted">
           <label>Location Name</label>
           <div class="">
