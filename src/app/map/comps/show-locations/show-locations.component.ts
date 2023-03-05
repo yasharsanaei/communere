@@ -1,12 +1,12 @@
 import { AfterViewInit, ApplicationRef, Component, ComponentRef, NgZone, OnDestroy, OnInit, ViewContainerRef } from '@angular/core';
 import * as Leaflet from 'leaflet';
+import { LatLngBoundsExpression } from 'leaflet';
 import { Subject, takeUntil } from 'rxjs';
 
 import { LeafletStatic } from '../../../core/types/map/leaflet-static';
 import { DataStoreService } from '../../../data-store/services/data-store.service';
 import { LocationPopupComponent } from '../location-popup/location-popup.component';
 import { Location } from '../../../core/types/location/location';
-import { LatLngBoundsExpression } from 'leaflet';
 
 @Component({
   selector: 'app-show-locations',
@@ -33,24 +33,16 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
 
   ngOnInit(): void {
     this.dataStoreService.locationList$.pipe(takeUntil(this._onDestroy$)).subscribe({
-      next: locationList => (this.locationList = [...locationList]),
+      next: locationList => {
+        this.locationList.map(l => LeafletStatic.generateMarker(l.position)).forEach(m => this.map.removeLayer(m));
+        this.locationList = [...locationList];
+        this._updateMapMarkers();
+      },
     });
   }
 
   ngAfterViewInit(): void {
-    this.zone.run(() => {
-      this.locationList.forEach(l => {
-        const popup = this.compilePopup(LocationPopupComponent, l);
-        LeafletStatic.generateMarker(l.position).addTo(this.map).bindPopup(popup);
-      });
-      const mapBounds = this.locationList.map(l => {
-        const { lat, lng } = l.position as any;
-        return [lat, lng];
-      });
-      this.map.setZoom(this.map.getBoundsZoom(mapBounds as LatLngBoundsExpression));
-      // this.map.panInsideBounds(mapBounds as LatLngBoundsExpression);
-      this.map.fitBounds(mapBounds as LatLngBoundsExpression);
-    });
+    this._updateMapMarkers();
   }
 
   ngOnDestroy(): void {
@@ -58,7 +50,7 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
     this._onDestroy$.complete();
   }
 
-  onMapReady($event: Leaflet.Map) {
+  onMapReady($event: Leaflet.Map): void {
     this.map = $event;
   }
 
@@ -70,5 +62,20 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
     const div = document.createElement('div');
     div.appendChild(compFactory.location.nativeElement);
     return div;
+  }
+
+  private _updateMapMarkers(): void {
+    this.zone.run(() => {
+      this.locationList.forEach(l => {
+        const popup = this.compilePopup(LocationPopupComponent, l);
+        LeafletStatic.generateMarker(l.position).addTo(this.map).bindPopup(popup);
+      });
+      const mapBounds = this.locationList.map(l => {
+        const { lat, lng } = l.position as any;
+        return [lat, lng];
+      });
+      this.map.setZoom(this.map.getBoundsZoom(mapBounds as LatLngBoundsExpression));
+      this.map.fitBounds(mapBounds as LatLngBoundsExpression);
+    });
   }
 }
