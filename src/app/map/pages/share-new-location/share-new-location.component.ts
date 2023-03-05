@@ -1,11 +1,12 @@
 import { Component, OnDestroy } from '@angular/core';
-import { Position } from '../../../core/types/map/position';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DataStoreService } from '../../../data-store/services/data-store.service';
 import * as Leaflet from 'leaflet';
-import { LocationImpl } from '../../../core/types/location/locationImpl';
 import { Subject, takeUntil } from 'rxjs';
+
+import { Position } from '../../../core/types/map/position';
+import { DataStoreService } from '../../../data-store/services/data-store.service';
+import { LocationImpl } from '../../../core/types/location/locationImpl';
 
 @Component({
   selector: 'app-share-new-location',
@@ -15,6 +16,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class ShareNewLocationComponent implements OnDestroy {
   private readonly _onDestroy$: Subject<void> = new Subject<void>();
   private _position: Leaflet.LatLngExpression | undefined;
+  private _existingLocation: LocationImpl | undefined;
 
   newLocationForm: FormGroup;
   isFormSubmitted: boolean;
@@ -42,10 +44,12 @@ export class ShareNewLocationComponent implements OnDestroy {
   }
 
   private updateForm(params: Record<string, string>) {
-    params['locationName'] && this.newLocationForm.controls['locationName'].setValue(params['locationName']);
-    params['locationType'] && this.newLocationForm.controls['locationType'].setValue(params['locationType']);
-    if (params['lat'] && params['lng']) {
-      this.initialPosition = { lat: +params['lat'], lng: +params['lng'] };
+    this._existingLocation = this._dataStoreService.getData(params['id']);
+    if (this._existingLocation?.locationName) this.newLocationForm.controls['locationName'].setValue(this._existingLocation.locationName);
+    if (this._existingLocation?.locationType) this.newLocationForm.controls['locationType'].setValue(this._existingLocation.locationType);
+    if (this._existingLocation?.position) {
+      this.initialPosition = this._existingLocation?.position;
+      this._position = this._existingLocation?.position;
     }
   }
 
@@ -56,14 +60,21 @@ export class ShareNewLocationComponent implements OnDestroy {
   async submitForm() {
     this.isFormSubmitted = true;
     if (this.newLocationForm.invalid || !this._position) return;
-    const locationName = this.newLocationForm.controls['locationName'].value;
-    const locationType = this.newLocationForm.controls['locationType'].value;
-    const location = new LocationImpl({
-      locationName,
-      locationType,
-      position: this._position,
-    });
-    this._dataStoreService.saveData(location);
+    const locationName = this.newLocationForm.controls['locationName'].value as string;
+    const locationType = this.newLocationForm.controls['locationType'].value as string;
+    if (this._existingLocation) {
+      this._existingLocation.locationName = locationName;
+      this._existingLocation.locationType = locationType;
+      this._existingLocation.position = this._position;
+      this._dataStoreService.saveData(this._existingLocation);
+    } else {
+      const location = new LocationImpl({
+        locationName,
+        locationType,
+        position: this._position,
+      });
+      this._dataStoreService.saveData(location);
+    }
     await this._router.navigateByUrl('/');
   }
 }

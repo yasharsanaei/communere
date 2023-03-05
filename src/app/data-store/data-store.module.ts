@@ -8,7 +8,5 @@ import { DataStoreService } from './services/data-store.service';
   imports: [CommonModule],
 })
 export class DataStoreModule {
-  constructor(private dataStoreService: DataStoreService) {
-    console.log('----------> DataStoreModule constructor');
-  }
+  constructor(private dataStoreService: DataStoreService) {}
 }

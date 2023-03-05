@@ -16,9 +16,7 @@ export class LocationPopupComponent {
   async editLocation() {
     await this.router.navigate(['/share-location'], {
       queryParams: {
-        locationName: this.location?.locationName,
-        locationType: this.location?.locationType,
-        ...this.location?.position,
+        id: this.location?.id,
       },
     });
   }
