@@ -31,6 +31,7 @@ export class MapSelectLocationComponent {
     this.map = $event;
     if (this.initialPosition) {
       const marker = LeafletStatic.generateMarker(this.initialPosition).addTo(this.map);
+      this.map.setZoomAround(marker.getLatLng(), 16, { animate: true });
       this.map.panTo(marker.getLatLng());
       this.markers.push(marker);
     }

@@ -48,7 +48,8 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
         return [lat, lng];
       });
       this.map.setZoom(this.map.getBoundsZoom(mapBounds as LatLngBoundsExpression));
-      this.map.panInsideBounds(mapBounds as LatLngBoundsExpression);
+      // this.map.panInsideBounds(mapBounds as LatLngBoundsExpression);
+      this.map.fitBounds(mapBounds as LatLngBoundsExpression);
     });
   }
 
@@ -66,6 +67,8 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
     compFactory.setInput('location', locationData);
     compFactory.onDestroy(() => this.appRef.detachView(compFactory.hostView));
     compFactory.changeDetectorRef.detectChanges();
-    return compFactory.location.nativeElement;
+    const div = document.createElement('div');
+    div.appendChild(compFactory.location.nativeElement);
+    return div;
   }
 }
