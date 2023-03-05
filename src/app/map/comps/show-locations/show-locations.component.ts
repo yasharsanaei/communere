@@ -6,6 +6,7 @@ import { LeafletStatic } from '../../../core/types/map/leaflet-static';
 import { DataStoreService } from '../../../data-store/services/data-store.service';
 import { LocationPopupComponent } from '../location-popup/location-popup.component';
 import { Location } from '../../../core/types/location/location';
+import { LatLngBoundsExpression } from 'leaflet';
 
 @Component({
   selector: 'app-show-locations',
@@ -42,6 +43,12 @@ export class ShowLocationsComponent implements OnInit, OnDestroy, AfterViewInit 
         const popup = this.compilePopup(LocationPopupComponent, l);
         LeafletStatic.generateMarker(l.position).addTo(this.map).bindPopup(popup);
       });
+      const mapBounds = this.locationList.map(l => {
+        const { lat, lng } = l.position as any;
+        return [lat, lng];
+      });
+      this.map.setZoom(this.map.getBoundsZoom(mapBounds as LatLngBoundsExpression));
+      this.map.panInsideBounds(mapBounds as LatLngBoundsExpression);
     });
   }
 
