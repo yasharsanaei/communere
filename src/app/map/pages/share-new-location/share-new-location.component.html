@@ -5,7 +5,32 @@
       card Header
     </div>
     <div class="card-body">
-      <app-map-select-location/>
+      <form [formGroup]="newLocationForm" (ngSubmit)="submitForm($event)">
+        <div class="form-group" [class.error]="newLocationForm.controls['locationName'].invalid && isFormSubmitted">
+          <label>Location Name</label>
+          <div class="">
+            <input type="text"
+                   formControlName="locationName">
+            <span *ngIf="newLocationForm.controls['locationName'].invalid && isFormSubmitted">Required</span>
+          </div>
+        </div>
+        <div class="form-group" [class.error]="newLocationForm.controls['locationType'].invalid && isFormSubmitted">
+          <label>Location Type</label>
+          <div class="">
+            <select formControlName="locationType">
+              <option value="Business">Business</option>
+              <option value="Apartment">Apartment</option>
+            </select>
+            <span *ngIf="newLocationForm.controls['locationType'].invalid && isFormSubmitted">Required</span>
+          </div>
+        </div>
+        <div class="form-group">
+          <label>Map location</label>
+          <app-map-select-location (selectedLocation)="handleSelectedLocation($event)"/>
+        </div>
+        <button type="submit">Submit</button>
+      </form>
+
     </div>
   </div>
 

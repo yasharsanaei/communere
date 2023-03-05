@@ -4,6 +4,7 @@
 :root {
   --primary-color: #3A98B9;
   --secondary-color: #F8CBA6;
+  --error-color: #F32013;
   --grey-dark: #555;
   --grey: #999;
   --grey-light: #ccc;
@@ -26,12 +27,14 @@
   --transition: 200ms ease-in-out all;
 }
 
+* {
+  box-sizing: border-box;
+  font-size: 16px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
 
 body {
   margin: 0;
-  font-size: 16px;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-  box-sizing: border-box;
 }
 
 .container {
@@ -97,3 +100,28 @@ a:hover {
   color: var(--white);
   font-weight: bold;
 }
+
+.error :not(label) {
+  color: var(--error-color);
+}
+
+.error :is(input, select) {
+  color: inherit;
+  border: 1px solid var(--error-color);
+}
+
+input, select {
+  all: unset;
+  box-sizing: border-box;
+  width: 100%;
+  padding: .5rem .25rem;
+  border: var(--global-border);
+  border-radius: var(--border-radius);
+}
+
+input:focus, select:focus {
+  border: 1px solid var(--primary-color);
+}
+
+
+
