@@ -7,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Position } from '../../../core/types/map/position';
 import { DataStoreService } from '../../../data-store/services/data-store.service';
 import { LocationImpl } from '../../../core/types/location/locationImpl';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-share-new-location',
@@ -26,8 +27,10 @@ export class ShareNewLocationComponent implements OnDestroy {
     private _formBuilder: FormBuilder,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
-    private _dataStoreService: DataStoreService
+    private _dataStoreService: DataStoreService,
+    private _title: Title
   ) {
+    this._title.setTitle('Share New Location');
     this.isFormSubmitted = false;
     this.newLocationForm = this._formBuilder.group({
       locationName: ['', Validators.compose([Validators.required])],
@@ -45,6 +48,7 @@ export class ShareNewLocationComponent implements OnDestroy {
 
   private updateForm(params: Record<string, string>) {
     this._existingLocation = this._dataStoreService.getData(params['id']);
+    if (this._existingLocation) this._title.setTitle('Edit Location');
     if (this._existingLocation?.locationName)
       this.newLocationForm.controls['locationName'].setValue(this._existingLocation.locationName);
     if (this._existingLocation?.locationType)
