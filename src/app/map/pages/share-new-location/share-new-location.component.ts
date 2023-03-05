@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { MapLocation } from '../../../core/types/map/map-location';
+import { Position } from '../../../core/types/map/position';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
@@ -27,7 +27,7 @@ export class ShareNewLocationComponent implements OnInit, OnDestroy {
     console.log('');
   }
 
-  handleSelectedLocation($event: MapLocation) {}
+  handleSelectedLocation($event: Position) {}
 
   submitForm($event: SubmitEvent) {
     this.isFormSubmitted = true;

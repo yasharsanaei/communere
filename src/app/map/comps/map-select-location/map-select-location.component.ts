@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 import * as Leaflet from 'leaflet';
 import { LeafletStatic } from '../../../core/types/map/leaflet-static';
 import { LeafletMouseEvent } from 'leaflet';
-import { MapLocation } from '../../../core/types/map/map-location';
+import { Position } from '../../../core/types/map/position';
 
 @Component({
   selector: 'app-map-select-location',
@@ -12,7 +12,7 @@ import { MapLocation } from '../../../core/types/map/map-location';
 })
 export class MapSelectLocationComponent {
   @Output()
-  selectedLocation: EventEmitter<MapLocation> = new EventEmitter();
+  selectedLocation: EventEmitter<Position> = new EventEmitter();
 
   constructor() {
     Leaflet.Icon.Default.mergeOptions(LeafletStatic.defaultIconProps());
@@ -29,7 +29,7 @@ export class MapSelectLocationComponent {
   }
 
   mapClicked($event: LeafletMouseEvent) {
-    const position: MapLocation = { lat: $event.latlng.lat, lng: $event.latlng.lng };
+    const position: Position = { lat: $event.latlng.lat, lng: $event.latlng.lng };
     const markerData = { position };
     if (this.markers && this.markers.length > 0) this.markers.pop()?.removeFrom(this.map);
     const marker = LeafletStatic.generateMarker(markerData)
