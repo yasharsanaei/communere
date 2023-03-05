@@ -4,12 +4,11 @@ import { Location } from '../../core/types/location/location';
 
 @Injectable()
 export class DataStoreService {
-  private _data: Location[];
+  private readonly _data: Location[];
 
   constructor() {
     const data = db().read();
-    console.log('----- data: ', data);
-    this._data = [];
+    this._data = data != null ? [...data] : [];
   }
 
   saveData(location: Location) {
