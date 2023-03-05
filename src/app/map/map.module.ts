@@ -10,9 +10,10 @@ import { MapSelectLocationComponent } from './comps/map-select-location/map-sele
 import {LeafletModule} from "@asymmetrik/ngx-leaflet";
 import {ReactiveFormsModule} from "@angular/forms";
 import { ShowLocationsComponent } from './comps/show-locations/show-locations.component';
+import { LocationPopupComponent } from './comps/location-popup/location-popup.component';
 
 @NgModule({
-  declarations: [ShareNewLocationComponent, ViewLocationsComponent, MapSelectLocationComponent, ShowLocationsComponent],
+  declarations: [ShareNewLocationComponent, ViewLocationsComponent, MapSelectLocationComponent, ShowLocationsComponent, LocationPopupComponent],
   imports: [CommonModule, MapRoutingModule, SharedModule, CoreModule, LeafletModule, ReactiveFormsModule],
 })
 export class MapModule {}
